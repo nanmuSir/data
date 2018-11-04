@@ -1,0 +1,65 @@
+#-*- coding:utf-8 -*-
+
+import sys
+from nltk import *                                                                                          #声明
+from operator import itemgetter                                                                 #排序
+
+def output_count(fdist):                                                                                
+    #vocabulary =fdist.items()
+    vocabulary =fdist.items()                                                                           #得到所有词汇
+
+
+    vocabulary=sorted(vocabulary, key=itemgetter(1),reverse=True)               #按增序排序
+    print vocabulary[:250]                                                                              #p输出数量最大的250个单词
+    print 'drawing plot.....'                                                                              
+    fdist.plot(120 , cumulative=False)                                                              #输出
+
+    #output in file
+    file_object = open('thefile.txt', 'w')                                                              
+    for j in vocabulary:
+        file_object.write( j[0] + ' ')                                                                       
+    file_object.close( )                                                                                       
+
+
+def pre_file(filename): 
+    print("read file %s.txt....."%filename)                                                            
+    content = open( str(filename) + '.txt', "r").read()
+    content = content.lower()
+    for ch in '!"#$%&()*+,-./:;<=>?@[\\]^_‘{|}~' :                                           
+        content = content.replace(ch, " ")
+
+    plurals = content.split()                                                                               #用 '\n' 或 ' '进行split操作
+
+    stemmer = PorterStemmer()                                                                       
+    singles = [stemmer.stem(plural) for plural in plurals]                                  
+
+    return singles
+
+
+
+#main function
+def main(): 
+    print "read index....."                                                                                
+    input = open('index.txt', 'r')                                                                      
+    all_the_file =input.read( )
+    file=all_the_file.split()
+    input.close()                                                                                              
+    fdist1=FreqDist()                                                                                       
+
+    for x in range( 0, len(file) ):
+        #print file[x]
+        txt = pre_file( file[x] )                                                                                  
+
+        for words in txt :
+            words =words.decode('utf-8').encode(sys.getfilesystemencoding())        #change string typt from utf-8 to gbk
+            fdist1[words] +=1                                                                                   
+
+
+
+    output_count(fdist1)
+
+
+
+#runfile
+if __name__ == '__main__': 
+    main() 

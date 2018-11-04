@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+ 
+import pandas as pd
+import jieba
+from nltk.stem import WordNetLemmatizer
+ 
+"""
+函数说明：停用词过滤
+Parameters:
+     filename:停用词文件
+     list_words_lemmatizer:词列表
+Returns:
+     list_filter_stopwords：停用词过滤后的词列表
+"""
+def stopwords_filter(filename,list_words_lemmatizer):
+    list_filter_stopwords=[]  #声明一个停用词过滤后的词列表
+    with open(filename,'r') as fr:
+        stop_words=list(fr.read().split('\n')) #将停用词读取到列表里
+        for i in range(len(list_words_lemmatizer)):
+            word_list = []
+            for j in list_words_lemmatizer[i]:
+                if j not in stop_words:
+                    word_list.append(j.lower()) #将词变为小写加入词列表
+            list_filter_stopwords.append(word_list)
+        return list_filter_stopwords
+ 
+if __name__=='__main__':
+    list_word_split, category_labels=word_split('testdata.xls') #获得每条文本的分词列表和标签列表
+    print('分词成功')
+    list_words_lemmatizer=word_lemmatizer(list_word_split)  #词性还原
+    print('词性还原成功')
+    list_filter_stopwords=stopwords_filter('stopwords.txt',list_words_lemmatizer) #获得停用词过滤后的列表
+    print("停用词过滤成功")

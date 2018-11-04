@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+ 
+import pandas as pd
+import jieba
+from nltk.stem import WordNetLemmatizer
+ 
+ 
+"""
+函数说明：词性还原
+Parameters:
+     list_words:数据列表
+Returns:
+     list_words_lemmatizer：词性还原后的数据集列表
+"""
+def word_lemmatizer(list_words):
+    wordnet_lemmatizer = WordNetLemmatizer()
+    list_words_lemmatizer = []
+    for word_list in list_words:
+        lemmatizer_word = []
+        for i in word_list:
+            lemmatizer_word.append(wordnet_lemmatizer.lemmatize(i))
+        list_words_lemmatizer.append(lemmatizer_word)
+    return list_words_lemmatizer
+ 
+ 
+if __name__=='__main__':
+    list_word_split, category_labels=word_split('testdata.xls') #获得每条文本的分词列表和标签列表
+    print('分词成功')
+    list_words_lemmatizer=word_lemmatizer(list_word_split)  #词性还原
+    print('词性还原成功')

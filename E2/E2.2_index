@@ -1,0 +1,82 @@
+#-*- coding:utf-8 -*-
+
+
+import sys
+import pickle                   
+from nltk import *                                                                                          #声明
+from operator import itemgetter                                                                 #排序
+
+
+STOPWORDS = []                                                                                          
+
+def output_index(result):
+    #print result
+
+    output = open('data.pkl', 'wb')
+    pickle.dump(result, output)                                                                     # 建立字典
+    output.close()
+
+
+def pre_file(filename): 
+    global STOPWORDS
+    print("read file %s.txt....."%filename)                                                             
+    content = open( str(filename) + '.txt', "r").read()
+    content = content.lower()
+    for ch in '!"#$%&()*+,-./:;<=>?@[\\]^_��{|}~' :                                           
+        content = content.replace(ch, " ")
+
+    for ch in  STOPWORDS:                                                                               
+        content = content.replace(ch, " ")      
+
+    plurals = content.split()                                                                               #用 '\n' 或 ' '进行split操作
+
+    stemmer = PorterStemmer()                                                                       
+    singles = [stemmer.stem(plural) for plural in plurals]                                  
+
+    return singles
+
+def readfile(filename):
+    input = open(filename, 'r')                                                                     
+    all_the_file =input.read( )
+    words = all_the_file.split()                                                                            #用 '\n' 或 ' '进行split操作
+    input.close()           
+    return words
+
+
+
+#main function
+def main(): 
+    global STOPWORDS
+    print "read index....."                                                                                 
+    file=readfile('index.txt')
+    print "read stopwords....." 
+    STOPWORDS = readfile('stop_word.txt')  
+
+    print "create word list....."
+    word = list(readfile('thefile.txt'))                                                     
+    result = {}                                                                                                #记住结果
+
+    for x in range( 0, len(file) ):
+        #print file[x]
+
+        txt = pre_file( file[x] )                                                                            # file[x] 是 title 
+        txt =  {}.fromkeys(txt).keys()                                                                      
+        #can also use text.set()                                                            
+
+        for words in txt :
+            words =words.decode('utf-8').encode(sys.getfilesystemencoding())        #change string typt from utf-8 to gbk
+            if result.get(words) == None :                                                          #如果单词不在字典中
+                result[words]=[file[x]]
+            else:                                                                                                #如果单词在字典中
+                t=result.get(words)
+                t.append(file[x])
+                result[words]=t
+
+
+    output_index(result)
+
+
+
+#runfile
+if __name__ == '__main__': 
+    main()

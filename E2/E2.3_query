@@ -1,0 +1,87 @@
+
+import os 
+import sys
+import pprint, pickle
+from nltk import PorterStemmer
+
+def readfile(filename):
+    input = open(filename, 'r')                                                                 #需要处理
+    all_the_file =input.read( )
+    words = all_the_file.split()                                                                        #用 '\n' 或 ' '进行split操作
+    input.close()                                                                                           #关闭数据集
+    return words
+
+def getdata():
+    pkl_file = open('data.pkl', 'rb')                                                               #下标被保存在哪 'data.pkl'
+    data1 = pickle.load(pkl_file)                                                                   #更改格式
+    #pprint.pprint(data1)
+    pkl_file.close()                                                                                        
+    return  data1                                                                                       
+
+def output( result ):
+    #print result
+    if result == None:                                              #如果单词没有再下标集中（没有return）
+        print None
+        return
+    if len(result) == 0 :                                           #如果单词没有再下标集中（多个return）
+        print None
+        return 
+
+    if len(result) < 10 :                                               #如果记录小于 10
+        print result
+
+    else:                                                                   #如果记录多于 10
+        print 'get '+ str(len(result)) + ' records'                                                                        
+            print '10 records start from ' +str(i*10+1)
+
+            if 10 * i + 9 < len(result) :                                
+                print result[ 10 * i : 10 * i + 10 ]
+            else:                                                                                     
+                print result[ 10 * i :  len(result) ]
+                break
+            getstr = raw_input("Enter 'N' for next ten records & other input to quit : ")
+            if getstr != 'N':
+                break
+
+
+
+#main function
+def main(): 
+    data_list = getdata()                                                                          data                                                                  
+    STOPWORDS = readfile('stop_word.txt') 
+    stemmer = PorterStemmer()                                                                                     
+
+    while True:
+        get_str = raw_input("Enter your query('\\'to quit): ")
+        if get_str == '\\' :                                                                              
+            break
+
+        get_str = get_str.lower()
+        for ch in  STOPWORDS:                                                                                           
+        query_list=get_str.split()                                                              #用 '\n' 或 ' '进行split操作
+        query_list = [stemmer.stem(plural) for plural in query_list]                                        
+
+        while True:     
+            if query_list != [] :
+                break
+            get_str = raw_input("Please enter more information: ")
+            get_str = get_str.lower()
+            for ch in  STOPWORDS:                                                                                       
+                 get_str = get_str.replace(ch, " ") 
+            query_list=get_str.split()
+            query_list = [stemmer.stem(plural) for plural in query_list]                                    
+
+
+
+        result=[]
+        for k in range( 0 , len(query_list) ):  
+            if k==0:                                                                                #如果没有list被建立 
+                result = data_list.get( query_list[0] )
+            else:                                                                                           #如果list已经被建立 
+                result = list( set(result).intersection(data_list.get( query_list[k] ) ) )
+        output( result )
+
+
+#runfile
+if __name__ == '__main__': 
+    main() 

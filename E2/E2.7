@@ -1,0 +1,27 @@
+"""
+函数说明：文本向量化，标签向量化   one-hot编码
+Parameters:
+     feature_words:特征词集
+     doc_words:文本列表
+     doc_category_labels:文本类别标签
+Returns:
+     docvec_list:文本向量列表
+     labelvec_list:标签向量列表
+"""
+def words2vec(feature_words,doc_words,doc_category_labels):
+    #文本列表转向量列表
+    docvec_list=[]
+    for words in doc_words:
+        docvec = [0] * len(feature_words)
+        for j in words:
+            if j in feature_words:
+                docvec[feature_words.index(j)]=1
+        docvec_list.append(docvec)
+    #标签列表转向量列表
+    labelvec_list = []
+    labelset=list(set(doc_category_labels))
+    for label in doc_category_labels:
+        doclabel = [0] * len(labelset)
+        doclabel[labelset.index(label)]=1
+        labelvec_list.append(doclabel)
+    return docvec_list,labelvec_list
