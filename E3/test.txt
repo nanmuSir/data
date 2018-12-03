@@ -1,0 +1,763 @@
+{
+
+ "cells": [
+
+  {
+
+   "cell_type": "code",
+
+   "execution_count": 28,
+
+   "metadata": {},
+
+   "outputs": [
+
+    {
+
+     "name": "stdout",
+
+     "output_type": "stream",
+
+     "text": [
+
+      "query: 171 ,AP: 0.90215897952\n",
+
+      "query: 172 ,AP: 0.162610652939\n",
+
+      "query: 173 ,AP: 0.200786911397\n",
+
+      "query: 174 ,AP: 0.774842171717\n",
+
+      "query: 175 ,AP: 0.19468526297\n",
+
+      "query: 176 ,AP: 0.860197392895\n",
+
+      "query: 177 ,AP: 0.623809854843\n",
+
+      "query: 178 ,AP: 0.454960276192\n",
+
+      "query: 179 ,AP: 0.195057390276\n",
+
+      "query: 180 ,AP: 0.150527686493\n",
+
+      "query: 181 ,AP: 0.878444989107\n",
+
+      "query: 182 ,AP: 0.180075423365\n",
+
+      "query: 183 ,AP: 0.415986384306\n",
+
+      "query: 184 ,AP: 0.357429203489\n",
+
+      "query: 185 ,AP: 0.736166390928\n",
+
+      "query: 186 ,AP: 0.774575898739\n",
+
+      "query: 187 ,AP: 0.916106284589\n",
+
+      "query: 188 ,AP: 0.322401829546\n",
+
+      "query: 189 ,AP: 0.0887289420273\n",
+
+      "query: 190 ,AP: 0.405550435469\n",
+
+      "query: 191 ,AP: 0.582204245505\n",
+
+      "query: 192 ,AP: 0.706896551724\n",
+
+      "query: 193 ,AP: 0.341070982212\n",
+
+      "query: 194 ,AP: 0.95459262334\n",
+
+      "query: 195 ,AP: 0.206301070098\n",
+
+      "query: 196 ,AP: 0.587978134956\n",
+
+      "query: 197 ,AP: 0.735872557002\n",
+
+      "query: 198 ,AP: 0.390166450997\n",
+
+      "query: 199 ,AP: 0.217718743289\n",
+
+      "query: 200 ,AP: 0.363893807427\n",
+
+      "query: 201 ,AP: 0.37037037037\n",
+
+      "query: 202 ,AP: 0.638669116046\n",
+
+      "query: 203 ,AP: 0.0590185135333\n",
+
+      "query: 204 ,AP: 0.782078625061\n",
+
+      "query: 205 ,AP: 0.575223272296\n",
+
+      "query: 206 ,AP: 0.532684064022\n",
+
+      "query: 207 ,AP: 0.697403986786\n",
+
+      "query: 208 ,AP: 0.246637815821\n",
+
+      "query: 209 ,AP: 0.164473684211\n",
+
+      "query: 210 ,AP: 0.155232471393\n",
+
+      "query: 211 ,AP: 0.805817307692\n",
+
+      "query: 212 ,AP: 0.575643806068\n",
+
+      "query: 213 ,AP: 0.279041083494\n",
+
+      "query: 214 ,AP: 0.679792110037\n",
+
+      "query: 215 ,AP: 0.289095824358\n",
+
+      "query: 216 ,AP: 0.521360314396\n",
+
+      "query: 217 ,AP: 0.445636807527\n",
+
+      "query: 218 ,AP: 0.229592385953\n",
+
+      "query: 219 ,AP: 0.190352004502\n",
+
+      "query: 220 ,AP: 0.391259095567\n",
+
+      "query: 221 ,AP: 0.198807157058\n",
+
+      "query: 222 ,AP: 0.289895238947\n",
+
+      "query: 223 ,AP: 0.292419933441\n",
+
+      "query: 224 ,AP: 0.634425334425\n",
+
+      "query: 225 ,AP: 0.938580289986\n",
+
+      "query 171 , NDCG:  0.8961377273174678\n",
+
+      "query 172 , NDCG:  0.6332024195465501\n",
+
+      "query 173 , NDCG:  0.24861773250110325\n",
+
+      "query 174 , NDCG:  0.8249180962200546\n",
+
+      "query 175 , NDCG:  0.5560852990796529\n",
+
+      "query 176 , NDCG:  0.7953915278957918\n",
+
+      "query 177 , NDCG:  0.7670152997386712\n",
+
+      "query 178 , NDCG:  0.755119322501339\n",
+
+      "query 179 , NDCG:  0.3125018927525105\n",
+
+      "query 180 , NDCG:  0.4860966313909001\n",
+
+      "query 181 , NDCG:  0.8008318075927678\n",
+
+      "query 182 , NDCG:  0.7617559596096738\n",
+
+      "query 183 , NDCG:  0.9549638078025575\n",
+
+      "query 184 , NDCG:  0.49312553955491784\n",
+
+      "query 185 , NDCG:  0.8040683236744922\n",
+
+      "query 186 , NDCG:  0.7547066575560418\n",
+
+      "query 187 , NDCG:  0.7829848809876251\n",
+
+      "query 188 , NDCG:  0.4994151451326214\n",
+
+      "query 189 , NDCG:  0.17084166532877326\n",
+
+      "query 190 , NDCG:  0.5421822754074354\n",
+
+      "query 191 , NDCG:  0.7236442728403722\n",
+
+      "query 192 , NDCG:  0.7479017982949275\n",
+
+      "query 193 , NDCG:  0.40753959596615363\n",
+
+      "query 194 , NDCG:  0.9171375457291093\n",
+
+      "query 195 , NDCG:  0.5404918120077757\n",
+
+      "query 196 , NDCG:  0.6878869914497332\n",
+
+      "query 197 , NDCG:  0.787426477432842\n",
+
+      "query 198 , NDCG:  0.34608881250735296\n",
+
+      "query 199 , NDCG:  0.8395328207145806\n",
+
+      "query 200 , NDCG:  0.7464302512466785\n",
+
+      "query 201 , NDCG:  0.8264536469987193\n",
+
+      "query 202 , NDCG:  0.8350279962784507\n",
+
+      "query 203 , NDCG:  0.14114044658560435\n",
+
+      "query 204 , NDCG:  0.7540897863679868\n",
+
+      "query 205 , NDCG:  0.8966478724177179\n",
+
+      "query 206 , NDCG:  0.5720873650071007\n",
+
+      "query 207 , NDCG:  0.7753053435128726\n",
+
+      "query 208 , NDCG:  0.5954399803391516\n",
+
+      "query 209 , NDCG:  0.7920713170961419\n",
+
+      "query 210 , NDCG:  0.11296302259478397\n",
+
+      "query 211 , NDCG:  0.8830503343360828\n",
+
+      "query 212 , NDCG:  0.8541845766750381\n",
+
+      "query 213 , NDCG:  0.7989605952128066\n",
+
+      "query 214 , NDCG:  0.7447030726080343\n",
+
+      "query 215 , NDCG:  0.5687215603236412\n",
+
+      "query 216 , NDCG:  0.7362701173671075\n",
+
+      "query 217 , NDCG:  0.5965684200723872\n",
+
+      "query 218 , NDCG:  0.4855276747605434\n",
+
+      "query 219 , NDCG:  0.1884214723718007\n",
+
+      "query 220 , NDCG:  0.5900250850300758\n",
+
+      "query 221 , NDCG:  0.881294175594326\n",
+
+      "query 222 , NDCG:  0.44711702179334994\n",
+
+      "query 223 , NDCG:  0.43003584011019896\n",
+
+      "query 224 , NDCG:  0.6892310970708694\n",
+
+      "query 225 , NDCG:  0.8131772507704577\n",
+
+      "MAP1 = 0.466641966188\n",
+
+      "NDCG1 = 0.647137408383\n",
+
+      "query: 171 ,AP: 0.898603713264\n",
+
+      "query: 172 ,AP: 0.152415312803\n",
+
+      "query: 173 ,AP: 0.192252625825\n",
+
+      "query: 174 ,AP: 0.740265712329\n",
+
+      "query: 175 ,AP: 0.190214947048\n",
+
+      "query: 176 ,AP: 0.833970179156\n",
+
+      "query: 177 ,AP: 0.574095819486\n",
+
+      "query: 178 ,AP: 0.450043119977\n",
+
+      "query: 179 ,AP: 0.190180660557\n",
+
+      "query: 180 ,AP: 0.141618584568\n",
+
+      "query: 181 ,AP: 0.88214869281\n",
+
+      "query: 182 ,AP: 0.181103306487\n",
+
+      "query: 183 ,AP: 0.40063193935\n",
+
+      "query: 184 ,AP: 0.345457208959\n",
+
+      "query: 185 ,AP: 0.698192630365\n",
+
+      "query: 186 ,AP: 0.769575898739\n",
+
+      "query: 187 ,AP: 0.875081217935\n",
+
+      "query: 188 ,AP: 0.316836173772\n",
+
+      "query: 189 ,AP: 0.0883333414867\n",
+
+      "query: 190 ,AP: 0.365074802726\n",
+
+      "query: 191 ,AP: 0.567812887778\n",
+
+      "query: 192 ,AP: 0.706896551724\n",
+
+      "query: 193 ,AP: 0.318492501084\n",
+
+      "query: 194 ,AP: 0.917133990693\n",
+
+      "query: 195 ,AP: 0.20502891379\n",
+
+      "query: 196 ,AP: 0.553462772646\n",
+
+      "query: 197 ,AP: 0.726304906038\n",
+
+      "query: 198 ,AP: 0.369838389906\n",
+
+      "query: 199 ,AP: 0.216705981437\n",
+
+      "query: 200 ,AP: 0.364345490584\n",
+
+      "query: 201 ,AP: 0.36426172753\n",
+
+      "query: 202 ,AP: 0.638529662168\n",
+
+      "query: 203 ,AP: 0.0525817591916\n",
+
+      "query: 204 ,AP: 0.777064222963\n",
+
+      "query: 205 ,AP: 0.571317972453\n",
+
+      "query: 206 ,AP: 0.500696222575\n",
+
+      "query: 207 ,AP: 0.699857386126\n",
+
+      "query: 208 ,AP: 0.246760704583\n",
+
+      "query: 209 ,AP: 0.164473684211\n",
+
+      "query: 210 ,AP: 0.139862593113\n",
+
+      "query: 211 ,AP: 0.796986346986\n",
+
+      "query: 212 ,AP: 0.581188588568\n",
+
+      "query: 213 ,AP: 0.28019427929\n",
+
+      "query: 214 ,AP: 0.676732083209\n",
+
+      "query: 215 ,AP: 0.284186215569\n",
+
+      "query: 216 ,AP: 0.502500951101\n",
+
+      "query: 217 ,AP: 0.436499204269\n",
+
+      "query: 218 ,AP: 0.235094965505\n",
+
+      "query: 219 ,AP: 0.177444814932\n",
+
+      "query: 220 ,AP: 0.349408320239\n",
+
+      "query: 221 ,AP: 0.198807157058\n",
+
+      "query: 222 ,AP: 0.289635857257\n",
+
+      "query: 223 ,AP: 0.249822289193\n",
+
+      "query: 224 ,AP: 0.626692752489\n",
+
+      "query: 225 ,AP: 0.933962440165\n",
+
+      "query 171 , NDCG:  0.8958885758617815\n",
+
+      "query 172 , NDCG:  0.6229003728970881\n",
+
+      "query 173 , NDCG:  0.22479283458298815\n",
+
+      "query 174 , NDCG:  0.8200224892554937\n",
+
+      "query 175 , NDCG:  0.5380823480195693\n",
+
+      "query 176 , NDCG:  0.7988212207151976\n",
+
+      "query 177 , NDCG:  0.731918626080738\n",
+
+      "query 178 , NDCG:  0.7517830884453767\n",
+
+      "query 179 , NDCG:  0.29039379196562726\n",
+
+      "query 180 , NDCG:  0.4642504332787775\n",
+
+      "query 181 , NDCG:  0.8012691962132971\n",
+
+      "query 182 , NDCG:  0.751729128375103\n",
+
+      "query 183 , NDCG:  0.9377091722940184\n",
+
+      "query 184 , NDCG:  0.4788722642211793\n",
+
+      "query 185 , NDCG:  0.8029275286728188\n",
+
+      "query 186 , NDCG:  0.7515162057332057\n",
+
+      "query 187 , NDCG:  0.7573653840634023\n",
+
+      "query 188 , NDCG:  0.49446891844523444\n",
+
+      "query 189 , NDCG:  0.17139463421630968\n",
+
+      "query 190 , NDCG:  0.5271828624383149\n",
+
+      "query 191 , NDCG:  0.7170097635959277\n",
+
+      "query 192 , NDCG:  0.7233651088539554\n",
+
+      "query 193 , NDCG:  0.4288021989165614\n",
+
+      "query 194 , NDCG:  0.8759744090703558\n",
+
+      "query 195 , NDCG:  0.5468712706643337\n",
+
+      "query 196 , NDCG:  0.65828876089014\n",
+
+      "query 197 , NDCG:  0.7985951881567863\n",
+
+      "query 198 , NDCG:  0.34435798859478073\n",
+
+      "query 199 , NDCG:  0.8498456191042367\n",
+
+      "query 200 , NDCG:  0.7426597550495104\n",
+
+      "query 201 , NDCG:  0.8237855030827286\n",
+
+      "query 202 , NDCG:  0.8342390411290993\n",
+
+      "query 203 , NDCG:  0.12138436477727034\n",
+
+      "query 204 , NDCG:  0.7540897863679868\n",
+
+      "query 205 , NDCG:  0.8845373233731669\n",
+
+      "query 206 , NDCG:  0.5588400503927202\n",
+
+      "query 207 , NDCG:  0.7595506819393412\n",
+
+      "query 208 , NDCG:  0.580166465462436\n",
+
+      "query 209 , NDCG:  0.8004105903997429\n",
+
+      "query 210 , NDCG:  0.11483319650884409\n",
+
+      "query 211 , NDCG:  0.8803304828726664\n",
+
+      "query 212 , NDCG:  0.8597835489639741\n",
+
+      "query 213 , NDCG:  0.7920644404135173\n",
+
+      "query 214 , NDCG:  0.7489986798588598\n",
+
+      "query 215 , NDCG:  0.5422903347257332\n",
+
+      "query 216 , NDCG:  0.7343703097513442\n",
+
+      "query 217 , NDCG:  0.6018608100900417\n",
+
+      "query 218 , NDCG:  0.48453221087569687\n",
+
+      "query 219 , NDCG:  0.19602641083425548\n",
+
+      "query 220 , NDCG:  0.5373101317240977\n",
+
+      "query 221 , NDCG:  0.8705810203951956\n",
+
+      "query 222 , NDCG:  0.4522105269120891\n",
+
+      "query 223 , NDCG:  0.3448963629304839\n",
+
+      "query 224 , NDCG:  0.6882187775981983\n",
+
+      "query 225 , NDCG:  0.8071336710767606\n",
+
+      "MAP2 = 0.45466691771\n",
+
+      "NDCG2 = 0.637663706566\n"
+
+     ]
+
+    }
+
+   ],
+
+   "source": [
+
+    "import math\n",
+
+    "import numpy as np\n",
+
+    "\n",
+
+    "def generate_tweetid_gain(file_name):\n",
+
+    "    qrels_dict = {}\n",
+
+    "    with open(file_name, 'r', errors='ignore') as f:\n",
+
+    "        for line in f:\n",
+
+    "            ele = line.strip().split(' ')\n",
+
+    "            if ele[0] not in qrels_dict:\n",
+
+    "                qrels_dict[ele[0]] = {}\n",
+
+    "            # here we want the gain of doc_id in qrels_dict > 0,\n",
+
+    "            # so it's sorted values can be IDCG groundtruth\n",
+
+    "            if int(ele[3]) > 0:\n",
+
+    "                qrels_dict[ele[0]][ele[2]] = int(ele[3])\n",
+
+    "    return qrels_dict\n",
+
+    "\n",
+
+    "def read_tweetid_test(file_name):\n",
+
+    "    # input file format\n",
+
+    "    # query_id doc_id\n",
+
+    "    # query_id doc_id\n",
+
+    "    # query_id doc_id\n",
+
+    "    # ...\n",
+
+    "    test_dict = {}\n",
+
+    "    with open(file_name, 'r', encoding='utf-16',errors='ignore') as f:\n",
+
+    "        for line in f:\n",
+
+    "            ele = line.strip().split()\n",
+
+    "            if ele[0] not in test_dict:\n",
+
+    "                test_dict[ele[0]] = []\n",
+
+    "            test_dict[ele[0]].append(ele[1])\n",
+
+    "    return test_dict\n",
+
+    "\n",
+
+    "def MAP_eval(qrels_dict, test_dict, k = 100):\n",
+
+    "    AP_result = []\n",
+
+    "    for query in qrels_dict:\n",
+
+    "        test_result = test_dict[query]\n",
+
+    "        true_list = set(qrels_dict[query].keys())\n",
+
+    "        #print(len(true_list))\n",
+
+    "        #length_use = min(k, len(test_result), len(true_list))\n",
+
+    "        length_use = min(k, len(test_result))\n",
+
+    "        if length_use <= 0:\n",
+
+    "            print('query ', query, ' not found test list')\n",
+
+    "            return []\n",
+
+    "        P_result = []\n",
+
+    "        i = 0\n",
+
+    "        i_retrieval_true = 0\n",
+
+    "        for doc_id in test_result[0: length_use]:\n",
+
+    "            i += 1\n",
+
+    "            if doc_id in true_list:\n",
+
+    "                i_retrieval_true += 1\n",
+
+    "                P_result.append(i_retrieval_true / i)\n",
+
+    "                #print(i_retrieval_true / i)\n",
+
+    "        if P_result:\n",
+
+    "            AP = np.sum(P_result) / len(true_list)\n",
+
+    "            print('query:', query, ',AP:', AP)\n",
+
+    "            AP_result.append(AP)\n",
+
+    "        else:\n",
+
+    "            print('query:', query, ' not found a true value')\n",
+
+    "            AP_result.append(0)\n",
+
+    "    return np.mean(AP_result)\n",
+
+    "\n",
+
+    "def NDCG_eval(qrels_dict, test_dict, k = 100):\n",
+
+    "    NDCG_result = []\n",
+
+    "    for query in qrels_dict:\n",
+
+    "        test_result = test_dict[query]\n",
+
+    "        # calculate DCG just need to know the gains of groundtruth\n",
+
+    "        # that is [2,2,2,1,1,1]\n",
+
+    "        true_list = list(qrels_dict[query].values())\n",
+
+    "        true_list = sorted(true_list, reverse=True)\n",
+
+    "        i = 1\n",
+
+    "        DCG = 0.0\n",
+
+    "        IDCG = 0.0\n",
+
+    "        # maybe k is bigger than arr length\n",
+
+    "        length_use = min(k, len(test_result), len(true_list))\n",
+
+    "        if length_use <= 0:\n",
+
+    "            print('query ', query, ' not found test list')\n",
+
+    "            return []\n",
+
+    "        for doc_id in test_result[0: length_use]:\n",
+
+    "            i += 1\n",
+
+    "            rel = qrels_dict[query].get(doc_id, 0)\n",
+
+    "            DCG += (pow(2, rel) - 1) / math.log(i, 2)\n",
+
+    "            IDCG += (pow(2, true_list[i - 2]) - 1) / math.log(i, 2)\n",
+
+    "        NDCG = DCG / IDCG\n",
+
+    "        print('query', query, ', NDCG: ', NDCG)\n",
+
+    "        NDCG_result.append(NDCG)\n",
+
+    "    return np.mean(NDCG_result)\n",
+
+    "\n",
+
+    "def evaluation():\n",
+
+    "    k = 100\n",
+
+    "    # query relevance file\n",
+
+    "    file_qrels_path = 'qrels.txt'\n",
+
+    "    # qrels_dict = {query_id:{doc_id:gain, doc_id:gain, ...}, ...}\n",
+
+    "    qrels_dict = generate_tweetid_gain(file_qrels_path)\n",
+
+    "    # ur result, format is in function read_tweetid_test, or u can write by ur own\n",
+
+    "    file_test_path = 'result.txt'    #BM25\n",
+
+    "    file_test_path2='result_2.txt'   #Pivoted Length Normalization VSM\n",
+
+    "    # test_dict = {query_id:[doc_id, doc_id, ...], ...}\n",
+
+    "    test_dict = read_tweetid_test(file_test_path)\n",
+
+    "    test_dict2=read_tweetid_test(file_test_path2)\n",
+
+    "    MAP1 = MAP_eval(qrels_dict, test_dict, k)\n",
+
+    "    NDCG1 = NDCG_eval(qrels_dict, test_dict, k)\n",
+
+    "    print('MAP1', ' = ', MAP1, sep='')\n",
+
+    "    print('NDCG1', ' = ', NDCG1, sep='')\n",
+
+    "    MAP2 = MAP_eval(qrels_dict,test_dict2,k)\n",
+
+    "    NDCG2=NDCG_eval(qrels_dict,test_dict2,k)\n",
+
+    "    print('MAP2', ' = ', MAP2, sep='')\n",
+
+    "    print('NDCG2', ' = ', NDCG2, sep='')\n",
+
+    "    \n",
+
+    "if __name__ == '__main__':\n",
+
+    "    evaluation()"
+
+   ]
+
+  },
+
+  {
+
+   "cell_type": "code",
+
+   "execution_count": null,
+
+   "metadata": {
+
+    "collapsed": true
+
+   },
+
+   "outputs": [],
+
+   "source": []
+
+  }
+
+ ],
+
+ "metadata": {
+
+  "kernelspec": {
+
+   "display_name": "Python 3",
+
+   "language": "python",
+
+   "name": "python3"
+
+  },
+
+  "language_info": {
+
+   "codemirror_mode": {
+
+    "name": "ipython",
+
+    "version": 3
+
+   },
+
+   "file_extension": ".py",
+
+   "mimetype": "text/x-python",
+
+   "name": "python",
+
+   "nbconvert_exporter": "python",
+
+   "pygments_lexer": "ipython3",
+
+   "version": "3.6.1"
+
+  }
+
+ },
+
+ "nbformat": 4,
+
+ "nbformat_minor": 2
+
+}
